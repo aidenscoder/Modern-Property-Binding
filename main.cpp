@@ -2,21 +2,19 @@
 #include "Properties/head.h"
 
 class Point {
-    int* _x = new int{0};
-    int* _y = new int{0};
+    int _x = 0;
+    int _y = 0;
 public:
     Property<int> x {
-        [this](){ return *_x; },
-        [this](auto v){ _x = new int{v}; },
-        [this](){ return _x; },
-        [this](){ delete _x; }
+        [this](){ return _x; }, //get
+        [this](auto v){ _x = v; }, //set
+        [this](){ return &_x; } //refrence
     };
 
     Property<int> y {
-        [this](){ return *_y; },
-        [this](auto v){ _y = new int{v}; },
-        [this](){ return _y; },
-        [this](){ delete _y; }
+        [this](){ return _y; }, //get
+        [this](auto v){ _y = v; }, //set
+        [this](){ return &_x; } //refrence
     };
     
     Point(int x, int y){
@@ -27,6 +25,9 @@ public:
 };
 
 int main(){
-    Point x{1,2};
+    Point p{13,16};
+    for (int i = 0; i < p.x; i++){
+        std::cout << i << std::endl;
+    }
     return 0;
 }

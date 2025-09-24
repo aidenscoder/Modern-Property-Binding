@@ -27,10 +27,8 @@ template<typename T, typename I = int, typename R = int>
 class Property {
     std::function<T()> get;
     std::function<void(T)> set;
-    std::function<void()> del;
     std::function<T*()> ref;
 public:
-    ~Property(){ del(); }
     Property(
         std::function<T()> get,
         std::function<void(T)> set = [](auto value){
@@ -38,9 +36,8 @@ public:
         },
         std::function<T*()> ref = [](){
             throw RefrenceError("Cannot refrence a non refrence property.");
-        },
-        std::function<void()> del = [](){}
-    ): get(get), set(set), ref(ref), del(del) {}
+        }
+    ): get(get), set(set), ref(ref) {}
 
     Property(const Property&) = delete;
     Property& operator=(const Property&) = delete;
