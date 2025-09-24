@@ -28,7 +28,7 @@ class Property {
     std::function<T()> get;
     std::function<void(T)> set;
     std::function<void()> del;
-    std::function<T&()> ref;
+    std::function<T*()> ref;
 public:
     ~Property(){ del(); }
     Property(
@@ -36,11 +36,11 @@ public:
         std::function<void(T)> set = [](auto value){
             throw ReadonlyError("Cannot change a readonly property.");
         },
-        std::function<void()> del = [](){},
-        std::function<T&()> ref = [](){
+        std::function<T*()> ref = [](){
             throw RefrenceError("Cannot refrence a non refrence property.");
-        }
-    ): get(get), set(set), del(del), ref(ref) {}
+        },
+        std::function<void()> del = [](){}
+    ): get(get), set(set), ref(ref), del(del) {}
 
     Property(const Property&) = delete;
     Property& operator=(const Property&) = delete;

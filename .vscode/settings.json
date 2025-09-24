@@ -1,6 +1,7 @@
 {
     "code-runner.clearPreviousOutput": true,
     "code-runner.runInTerminal": true,
+    "code-runner.fileDirectoryAsCwd": true,
     "code-runner.executorMap": {
         "c":"gcc $fileName -o exec && ./exec && rm exec.exe",
         "cpp":"g++ -std=c++20 $fileName -o exec && ./exec && rm exec.exe"
