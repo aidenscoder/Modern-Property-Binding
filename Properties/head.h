@@ -42,6 +42,7 @@ public:
     Property(const Property&) = delete;
     Property& operator=(const Property&) = delete;
     T& MutableRef(){ return ref(); }
+    operator T() const { return get(); }
 
     //Standard
     #pragma region
@@ -138,5 +139,4 @@ public:
     #pragma endregion
     //Comparisons
 
-    operator T() const { return get(); }
 };
