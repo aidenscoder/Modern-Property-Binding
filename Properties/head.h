@@ -33,11 +33,11 @@ public:
     ~Property(){ del(); }
     Property(
         std::function<T()> get,
-        std::function<void(T)> set = [](auto value) -> T {
+        std::function<void(T)> set = [](auto value){
             throw ReadonlyError("Cannot change a readonly property.");
         },
         std::function<void()> del = [](){},
-        std::function<T&()> ref = []() -> T& {
+        std::function<T&()> ref = [](){
             throw RefrenceError("Cannot refrence a non refrence property.");
         }
     ): get(get), set(set), del(del), ref(ref) {}
