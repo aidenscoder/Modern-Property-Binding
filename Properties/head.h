@@ -22,7 +22,10 @@ public:
     }
 };
 
-
+/// @brief A property wrapper designed for meta programming, and insertion of assignment.
+/// @tparam T The type the class.
+/// @tparam I The index type for the [] overload.
+/// @tparam R The return type for the [] overload.
 template<typename T, typename I = int, typename R = int>
 class Property {
     std::function<T()> get;
@@ -138,5 +141,14 @@ public:
 
     #pragma endregion
     //Comparisons
+
+    //Protocols
+    #pragma region
+        
+    R begin() requires Prop::Std::Iterable<T> { return get().begin(); }
+    R end() requires Prop::Std::Iterable<T> { return get().end(); }
+
+    #pragma endregion
+    //Protocols
 
 };

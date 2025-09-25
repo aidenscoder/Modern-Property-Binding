@@ -42,6 +42,12 @@ namespace Prop {
         concept Index = requires(T a, I b) {
             { a[b] } -> std::convertible_to<R>;
         };
+
+        template <typename T>
+        concept Iterable = requires(T a){
+            std::begin(a);
+            std::end(a);
+        };
     };
     
     namespace Bitwise {
