@@ -3,8 +3,8 @@
     "code-runner.runInTerminal": true,
     "code-runner.fileDirectoryAsCwd": true,
     "code-runner.executorMap": {
-        "c":"gcc $fileName -o exec && ./exec && rm exec.exe",
-        "cpp":"g++ -std=c++20 $fileName -o exec && ./exec && rm exec.exe"
+        "c":"gcc $fileName -o exec && exec & del exec.exe",
+        "cpp":"g++ -std=c++20 $fileName -o exec & exec del rm exec.exe"
     },
     "files.associations": {
         ".fantomasignore": "ignore",

@@ -29,5 +29,6 @@ int main(){
     for (int i = 0; i < p.x; i++){
         std::cout << i << std::endl;
     }
+    std::cout << p.x << std::endl;
     return 0;
 }
