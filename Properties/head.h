@@ -44,7 +44,7 @@ public:
     ): get(get), set(set), ref(ref) {}
 
     Property(const Property&) = delete;
-    Property& operator=(const Property&) = delete;
+    T operator=(const Property&) {return get(); }
     T* operator->(){ return ref(); }
     T* manref(){ return ref(); }
     operator T() const { return get(); }
