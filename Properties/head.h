@@ -45,6 +45,7 @@ public:
     Property(const Property&) = delete;
     Property& operator=(const Property&) = delete;
     T* operator->(){ return ref(); }
+    T* manref(){ return ref(); }
     operator T() const { return get(); }
 
     //Standard
@@ -141,14 +142,5 @@ public:
 
     #pragma endregion
     //Comparisons
-
-    //Protocols
-    #pragma region
-        
-    R begin() requires Prop::Std::Iterable<T> { return get().begin(); }
-    R end() requires Prop::Std::Iterable<T> { return get().end(); }
-
-    #pragma endregion
-    //Protocols
 
 };
