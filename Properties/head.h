@@ -45,7 +45,7 @@ public:
     _Property(const _Property&) = delete;
     T operator=(const _Property&) {return get(); }
     T* operator->(){ return ref(); }
-    T* operator*(){ return ref(); }
+    T* operator*(){ return *ref(); }
     operator T() const { return get(); }
 
     //Standard
