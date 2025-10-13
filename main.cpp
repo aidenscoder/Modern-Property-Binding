@@ -3,23 +3,18 @@
 
 class Point {
     int _x,_y;
-public:
     Property<int> x {
-        [this](){return _x;},
-        [this](auto v){_x = x;}
+        get_p {  return _x; },
+        set_p { _x = value; },
+        ref_p { return &_x; }
     };
 
     Property<int> y {
-        [this](){return _y;},
-        [this](auto v){_y = x;}
+        get_p { return _y; },
+        set_p { _y = value; },
+        ref_p { return &_y; }
     };
-
-    Point(int x, int y){
-        this->x = x;
-        this->y = y;
-    }
 };
-
 
 int main(){
     return 0;

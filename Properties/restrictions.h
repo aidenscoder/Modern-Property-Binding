@@ -1,5 +1,5 @@
 #pragma once
-
+#include <concepts>
 namespace Prop {
     
     namespace Std {

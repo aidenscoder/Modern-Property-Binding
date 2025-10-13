@@ -1,8 +1,12 @@
 #pragma once
 #include <functional>
-#include "concepts.h"
+#include "restrictions.h"
 #include <exception>
 #include <string>
+
+#define get_p [this]() -> auto
+#define set_p [this](auto value)
+#define ref_p [this]() -> auto*
 
 class ReadonlyError : std::exception {
     std::string msg;
@@ -40,7 +44,7 @@ public:
     Property(const Property&) = delete;
     T operator=(const Property&) {return get(); }
     T* operator->(){ return ref(); }
-    T* manref(){ return ref(); }
+    T* operator*(){ return ref(); }
     operator T() const { return get(); }
 
     //Standard
