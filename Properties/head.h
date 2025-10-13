@@ -7,6 +7,7 @@
 #define get_p [this]() -> auto
 #define set_p [this](auto value)
 #define ref_p [this]() -> auto*
+#define property _Property
 
 class ReadonlyError : std::exception {
     std::string msg;
@@ -27,13 +28,13 @@ protected:
 /// @note The refrence accessor uses a pointer to interact with access. Although it defaults to an error, 
 /// @note it can be defaulted to the underlying type, by using new T(args) in the ref by not exposing internal state.
 template<typename T, typename I = int, typename R = int>
-class Property {
+class _Property {
 private:
     std::function<T()> get;
     std::function<void(T)> set;
     std::function<T*()> ref;
 public:
-    Property(
+    _Property(
         std::function<T()> get,
         std::function<void(T)> set = [](auto value){
             throw ReadonlyError("Cannot change a readonly property.");
@@ -41,8 +42,8 @@ public:
         std::function<T*()> ref = [](){ return nullptr; }
     ): get(get), set(set), ref(ref) {}
 
-    Property(const Property&) = delete;
-    T operator=(const Property&) {return get(); }
+    _Property(const _Property&) = delete;
+    T operator=(const _Property&) {return get(); }
     T* operator->(){ return ref(); }
     T* operator*(){ return ref(); }
     operator T() const { return get(); }
@@ -60,19 +61,19 @@ public:
         #pragma region
 
             void operator=(const T& value) requires AssignProp::Std::Assign<T> { set(value); }
-            Property& operator+=(const T& value) requires AssignProp::Std::Add<T> { 
+            _Property& operator+=(const T& value) requires AssignProp::Std::Add<T> { 
                 set(value + get()); 
                 return *this;
             }
-            Property& operator-=(const T& value) requires AssignProp::Std::Sub<T> { 
+            _Property& operator-=(const T& value) requires AssignProp::Std::Sub<T> { 
                 set(value - get()); 
                 return *this;
             }
-            Property& operator*=(const T& value) requires AssignProp::Std::Mult<T> { 
+            _Property& operator*=(const T& value) requires AssignProp::Std::Mult<T> { 
                 set(value * get()); 
                 return *this;
             }
-            Property& operator/=(const T& value) requires AssignProp::Std::Div<T> {
+            _Property& operator/=(const T& value) requires AssignProp::Std::Div<T> {
                 set(value / get());
                 return *this;
             }
@@ -106,19 +107,19 @@ public:
         // Assigment
         #pragma region
 
-            Property& operator<<=(const T& value) requires AssignProp::Bitwise::LeftShift<T> { 
+            _Property& operator<<=(const T& value) requires AssignProp::Bitwise::LeftShift<T> { 
                 set(value << get()); 
                 return *this;
             }
-            Property& operator>>=(const T& value) requires AssignProp::Bitwise::RightShift<T> { 
+            _Property& operator>>=(const T& value) requires AssignProp::Bitwise::RightShift<T> { 
                 set(value >> get()); 
                 return *this;
             }
-            Property& operator^=(const T& value) requires AssignProp::Bitwise::Xor<T> { 
+            _Property& operator^=(const T& value) requires AssignProp::Bitwise::Xor<T> { 
                 set(value ^ get()); 
                 return *this;
             }
-            Property& operator&=(const T& value) requires AssignProp::Bitwise::And<T> {
+            _Property& operator&=(const T& value) requires AssignProp::Bitwise::And<T> {
                 set(value & get());
                 return *this;
             }
@@ -142,7 +143,7 @@ public:
     #pragma endregion
     //Comparisons
 
-    static void bind_properties(Property<T,I,R> orig_prop, Property<T,I,R> prop_to_bind){
+    static void bind_properties(_Property<T,I,R> orig_prop, _Property<T,I,R> prop_to_bind){
         prop_to_bind.get = [&]{ return orig_prop.get(); };
         prop_to_bind.set = [&](auto value){ return orig_prop.set(value); };
         prop_to_bind.ref = [&](){ return prop_to_bind.ref(); };
