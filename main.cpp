@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Properties/head.h"
-#include <cstdbool>
 
 class Point {
     int _x,_y;
@@ -15,8 +14,16 @@ class Point {
         set_p { _y = value; },
         ref_p { return &_y; }
     };
+
+public:
+    Point(int x, int y){
+        this->x = x;
+        this->y = y;
+    }
 };
 
 int main(){
+    Point x = {1,2};
+    x;
     return 0;
 }

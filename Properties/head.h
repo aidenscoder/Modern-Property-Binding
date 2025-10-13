@@ -60,7 +60,10 @@ public:
         // Assigment
         #pragma region
 
-            void operator=(const T& value) requires AssignProp::Std::Assign<T> { set(value); }
+            _Property& operator=(const T& value) requires AssignProp::Std::Assign<T> { 
+                set(value); 
+                return *this;
+            }
             _Property& operator+=(const T& value) requires AssignProp::Std::Add<T> { 
                 set(value + get()); 
                 return *this;
