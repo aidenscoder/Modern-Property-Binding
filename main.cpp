@@ -14,10 +14,10 @@ public:
     nametag(std::string internal){
         name = internal;
     }
-    
 };
 
 int main(){
     nametag x = nametag("hello");
+    x.name->append("xk");
     return 0;
 }

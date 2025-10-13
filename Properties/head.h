@@ -23,9 +23,14 @@ public:
 };
 
 /// @brief A property wrapper designed for meta programming, and insertion of assignment.
+/// @brief Supports get, set and ref. set defaults to raising a ReadonlyError, and ref defaults to raising
+/// @brief a RefrenceError.
+/// @brief Requirements: c++20 standard. concepts.h file, head.h file.
 /// @tparam T The type the class.
 /// @tparam I The index type for the [] overload.
 /// @tparam R The return type for the [] overload.
+/// @note The refrence accessor uses a pointer to interact with access. Although it defaults to an error, 
+/// @note it can be defaulted to the underlying type, by using new T(args) in the ref by not exposing internal state.
 template<typename T, typename I = int, typename R = int>
 class Property {
 private:
