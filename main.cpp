@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Properties/head.h"
-#include "string.h"
 
 class nametag {
 private:
@@ -18,6 +17,5 @@ public:
 
 int main(){
     nametag x = nametag("hello");
-    x.name->append("xk");
     return 0;
 }
