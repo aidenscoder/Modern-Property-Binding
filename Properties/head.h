@@ -146,5 +146,4 @@ public:
 
     static constexpr int size = 96;
     static constexpr int fn = 3;
-    static constexpr int supported_operators = 30;
 };
