@@ -1,22 +1,21 @@
 #include <iostream>
 #include "Properties/head.h"
 
-class nametag {
-private:
-    std::string internal;
+class Point {
+    int _x,_y;
 public:
-    Property<std::string> name {
-        [this](){ return internal; },
-        [this](auto value){ internal = value; },
-        [this](){ return &internal; }
+    Property<int> x{
+        [this](){return _x;},
+        [this](auto v){_x = x;}
     };
-    nametag(std::string internal){
-        name = internal;
+
+    Property<int> y{
+        [this](){return _y;},
+        [this](auto v){_y = x;}
+    };
+
+    Point(int x, int y){
+        this->x = x;
+        this->y = y;
     }
 };
-
-int main(){
-    nametag x = nametag("hello");
-    x.name->append("x");
-    return 0;
-}

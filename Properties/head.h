@@ -13,15 +13,6 @@ public:
     }
 };
 
-class RefrenceError : std::exception {
-    std::string msg;
-public:
-    RefrenceError(std::string msg): msg(msg) {}
-    const char* what() const noexcept {
-        return msg.c_str();
-    }
-};
-
 /// @brief A property wrapper designed for meta programming, and insertion of assignment.
 /// @brief Supports get, set and ref. set defaults to raising a ReadonlyError, and ref defaults to raising
 /// @brief a RefrenceError.
@@ -43,9 +34,7 @@ public:
         std::function<void(T)> set = [](auto value){
             throw ReadonlyError("Cannot change a readonly property.");
         },
-        std::function<T*()> ref = [](){
-            throw RefrenceError("Cannot refrence a non refrence property.");
-        }
+        std::function<T*()> ref = [](){ return nullptr; }
     ): get(get), set(set), ref(ref) {}
 
     Property(const Property&) = delete;
