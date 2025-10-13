@@ -4,12 +4,12 @@
 class Point {
     int _x,_y;
 public:
-    Property<int> x{
+    Property<int> x {
         [this](){return _x;},
         [this](auto v){_x = x;}
     };
 
-    Property<int> y{
+    Property<int> y {
         [this](){return _y;},
         [this](auto v){_y = x;}
     };
@@ -19,3 +19,8 @@ public:
         this->y = y;
     }
 };
+
+
+int main(){
+    return 0;
+}
