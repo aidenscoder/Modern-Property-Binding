@@ -6,7 +6,7 @@
 
 class ReadonlyError : std::exception {
     std::string msg;
-public:
+protected:
     ReadonlyError(std::string msg): msg(msg) {}
     const char* what() const noexcept {
         return msg.c_str();
@@ -138,4 +138,13 @@ public:
     #pragma endregion
     //Comparisons
 
+    static void bind_properties(Property<T,I,R> orig_prop, Property<T,I,R> prop_to_bind){
+        prop_to_bind.get = [&]{ return orig_prop.get(); };
+        prop_to_bind.set = [&](auto value){ return orig_prop.set(value); };
+        prop_to_bind.ref = [&](){ return prop_to_bind.ref(); };
+    }
+
+    static constexpr int size = 96;
+    static constexpr int fn = 3;
+    static constexpr int supported_operators = 30;
 };
