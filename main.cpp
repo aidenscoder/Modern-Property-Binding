@@ -17,5 +17,6 @@ public:
 
 int main(){
     nametag x = nametag("hello");
+    x.name->append("x");
     return 0;
 }
