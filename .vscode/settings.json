@@ -4,6 +4,6 @@
     "code-runner.fileDirectoryAsCwd": true,
     "code-runner.executorMap": {
         "c":"gcc $fileName -o exec && exec & del exec.exe",
-        "cpp":"g++ -std=c++20 $fileName -o exec & exec del exec.exe"
+        "cpp":"g++ -std=c++20 $fileName -o exec && exec & del exec.exe"
     }
 }

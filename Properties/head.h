@@ -44,7 +44,7 @@ public:
 
     Property(const Property&) = delete;
     Property& operator=(const Property&) = delete;
-    T& MutableRef(){ return ref(); }
+    T* operator->(){ return ref(); }
     operator T() const { return get(); }
 
     //Standard
