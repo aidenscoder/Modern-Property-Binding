@@ -28,6 +28,7 @@ public:
 /// @tparam R The return type for the [] overload.
 template<typename T, typename I = int, typename R = int>
 class Property {
+private:
     std::function<T()> get;
     std::function<void(T)> set;
     std::function<T*()> ref;
