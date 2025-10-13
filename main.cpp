@@ -3,6 +3,7 @@
 
 class Point {
     int _x,_y;
+public:
     property<int> x {
         get_p {  return _x; },
         set_p { _x = value; },
@@ -15,7 +16,6 @@ class Point {
         ref_p { return &_y; }
     };
 
-public:
     Point(int x, int y){
         this->x = x;
         this->y = y;
@@ -24,6 +24,5 @@ public:
 
 int main(){
     Point x = {1,2};
-    x;
     return 0;
 }
